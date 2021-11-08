@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const App = props => {
     const [state, setState] = useState(props)
     const { name, price } = state
+
+    // useEffect は render の　「後」に読み込み
+    useEffect(() => {
+        console.log('This is like componentDidMount or componentDidUpdate.')
+    })
+
+    // ↓　最初のレンダリングのときに限定したい場合
+    useEffect(() => {
+        console.log('This is like componentDidMount.')
+    }, [])
+
+    // ↓　name が変更されたときに限定したい場合
+    useEffect(() => {
+        console.log('This callback is for name only.')
+    }, [name])
 
     return (
         <>
